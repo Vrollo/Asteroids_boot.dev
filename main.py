@@ -17,6 +17,12 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    # Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    
+    Player.containers = (updatable, drawable)
+
     # Setup player
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
@@ -28,9 +34,10 @@ def main():
         # Clear the screen
         screen.fill((0, 0, 0))
         # Update 
-        player.update(dt)
+        updatable.update(dt)
         # Draw player
-        player.draw(screen)
+        for object in drawable:
+            object.draw(screen)
         # Flip the screen to visible screen
         pygame.display.flip()
         # FPS functions
