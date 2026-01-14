@@ -1,4 +1,6 @@
 import pygame
+
+from player import Player
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from logger import log_state
 
@@ -15,13 +17,21 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    # Setup player
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
     while True:
         log_state()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-
+        # Clear the screen
         screen.fill((0, 0, 0))
+        # Update 
+        player.update(dt)
+        # Draw player
+        player.draw(screen)
+        # Flip the screen to visible screen
         pygame.display.flip()
         # FPS functions
         dt = clock.tick(60) / 1000
