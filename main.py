@@ -16,6 +16,9 @@ def main():
     # Initialize Pygame
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    # Load a background image onto a surface
+    background_surface = pygame.image.load("./background/star_background.png")
+    background_surface.set_alpha(128)
 
     # Setup a clock object to be used for FPS calculation/limitation
     clock = pygame.time.Clock()
@@ -59,7 +62,9 @@ def main():
                     shot.kill()
                     asteroid.split()
 
-        # Draw player
+        # Draw background
+        screen.blit(background_surface, (0, 0))
+        # Draw all objects in drawable container
         for object in drawable:
             object.draw(screen)
         # Flip the screen to visible screen
